@@ -1,4 +1,4 @@
-This is a complete `README.md` you can copy-paste into your repo.
+
 
 ***
 
@@ -421,4 +421,3 @@ export interface User {
 
 ***
 
-You can now paste this into a `README.md` file at the root of your project.
