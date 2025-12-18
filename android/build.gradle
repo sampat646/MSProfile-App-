@@ -18,4 +18,12 @@ buildscript {
     }
 }
 
+// Ensure all projects use mavenCentral()
+allprojects {
+    repositories {
+        google()
+        mavenCentral() // important for react-native-msal
+    }
+}
+
 apply plugin: "com.facebook.react.rootproject"

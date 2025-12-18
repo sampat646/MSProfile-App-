@@ -1,0 +1,29 @@
+diff --git a/node_modules/react-native-msal/android/build.gradle b/node_modules/react-native-msal/android/build.gradle
+index 6c59f86..8197d02 100644
+--- a/node_modules/react-native-msal/android/build.gradle
++++ b/node_modules/react-native-msal/android/build.gradle
+@@ -1,7 +1,7 @@
+ buildscript {
+   repositories {
+     google()
+-    jcenter()
++    mavenCentral()
+   }
+ 
+   dependencies {
+@@ -41,13 +41,13 @@ android {
+ repositories {
+   mavenLocal()
+   maven {
+-    // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+     url("$rootDir/../node_modules/react-native/android")
+   }
+   google()
+-  jcenter()
++  mavenCentral()
+ }
+ 
++
+ dependencies {
+   // noinspection GradleDynamicVersion
+   implementation 'com.facebook.react:react-native:+' // From node_modules

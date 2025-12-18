@@ -1,0 +1,8 @@
+import Config from 'react-native-config';
+
+export const env = {
+  MICROSOFT_CLIENT_ID: Config.MICROSOFT_CLIENT_ID || '',
+  MICROSOFT_TENANT_ID: Config.MICROSOFT_TENANT_ID || '',
+  MICROSOFT_REDIRECT_URI: Config.MICROSOFT_REDIRECT_URI || '',
+  MICROSOFT_ANDROID_SIGNATURE_HASH: Config.MICROSOFT_ANDROID_SIGNATURE_HASH || '', // Add this line
+};

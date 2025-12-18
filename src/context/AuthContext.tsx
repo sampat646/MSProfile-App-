@@ -1,0 +1,1 @@
+// Global auth state management
