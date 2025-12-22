@@ -1,4 +1,4 @@
-This is a complete `README.md` you can copy-paste into your repo.
+
 
 ***
 
@@ -94,7 +94,7 @@ Before starting, ensure you have:
 
 ```bash
 # Using React Native CLI
-npx react-native init MSProfileApp --template react-native-template-typescript
+npx @react-native-community/cli init MyApp
 
 # OR using Expo
 npx create-expo-app MSProfileApp --template
@@ -421,4 +421,3 @@ export interface User {
 
 ***
 
-You can now paste this into a `README.md` file at the root of your project.
