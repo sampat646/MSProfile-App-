@@ -27,3 +27,6 @@ allprojects {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+// ... existing includes
+
+// ADD THESE LINES AT THE VERY END:
