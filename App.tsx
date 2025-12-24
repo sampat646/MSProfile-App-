@@ -1,26 +1,20 @@
 // App.tsx
 import React, { useState } from 'react';
-import { SafeAreaView, View, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import AuthNavbar from './src/components/AuthNavbar';
 import BottomNav from './src/components/BottomNav';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import GroupsScreen from './src/screens/GroupsScreen';
-// import GroupScreen from './src/screens/GroupScreen'; // Add when ready
+import { RootStackParamList } from './src/types/navigation.types';
 
-const AppContent = () => {
-  const { user, login, logout } = useAuth();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const MainTabs = () => {
   const [activeTab, setActiveTab] = useState<'home' | 'group' | 'profile'>('home');
-
-  if (!user) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <AuthNavbar onLogin={login} onLogout={logout} />
-        <View style={styles.content} />
-      </SafeAreaView>
-    );
-  }
 
   const renderScreen = () => {
     switch (activeTab) {
@@ -43,23 +37,54 @@ const AppContent = () => {
     }
   };
 
+  return (
+    <View style={styles.content}>
+      {renderScreen()}
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+    </View>
+  );
+};
+
+const AppNavigator = () => {
+  const { login, logout } = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
       <AuthNavbar onLogin={login} onLogout={logout} />
-      <View style={styles.content}>
-        {renderScreen()}
-      </View>
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: '#f8fafc' },
+        }}
+      >
+        <Stack.Screen name="Home" component={MainTabs} />
+      </Stack.Navigator>
     </SafeAreaView>
   );
 };
 
+const AppContent = () => {
+  const { user, login } = useAuth();
+
+  if (!user) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <AuthNavbar onLogin={login} onLogout={() => {}} />
+        <View style={styles.content} />
+      </SafeAreaView>
+    );
+  }
+
+  return <AppNavigator />;
+};
+
 const App = () => {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <NavigationContainer>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </NavigationContainer>
   );
 };
 
@@ -70,12 +95,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingBottom: 0, // BottomNav handles its own spacing
-  },
-  placeholder: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

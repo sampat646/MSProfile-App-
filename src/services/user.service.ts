@@ -65,7 +65,6 @@ export const getUserPhoto = async (accessToken: string): Promise<string | null> 
 
 };
 
-// src/services/user.service.ts - REPLACE axios with fetch:
 
 export const getUserGroups = async (accessToken: string) => {
   try {

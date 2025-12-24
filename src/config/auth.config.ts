@@ -13,7 +13,9 @@ export const authConfig = {
     'email', 
     'User.Read',
     'Group.Read.All',      // ✅ GROUPS
-    'GroupMember.Read.All' // ✅ GROUP MEMBERS
+    'GroupMember.Read.All', // ✅ GROUP MEMBERS
+    'Sites.Read.All',      // ✅ SHAREPOINT SITES (for news)
+    'Sites.ReadWrite.All'  // ✅ SHAREPOINT WRITE (if you need to create/edit news)
   ],
   serviceConfiguration: {
     authorizationEndpoint: `https://login.microsoftonline.com/${env.MICROSOFT_TENANT_ID}/oauth2/v2.0/authorize`,
