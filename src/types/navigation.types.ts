@@ -7,8 +7,15 @@ export type RootStackParamList = {
   // Add other screens here as needed
 };
 
+export type TabsParamList = {
+  Home: undefined;
+  People: undefined;
+  Profile: undefined;
+}
+
+
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }

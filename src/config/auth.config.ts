@@ -11,11 +11,13 @@ export const authConfig = {
     'openid', 
     'profile', 
     'email', 
-    'User.Read',
-    'Group.Read.All',      // ✅ GROUPS
-    'GroupMember.Read.All', // ✅ GROUP MEMBERS
-    'Sites.Read.All',      // ✅ SHAREPOINT SITES (for news)
-    'Sites.ReadWrite.All'  // ✅ SHAREPOINT WRITE (if you need to create/edit news)
+    'User.Read',              // ✅ Read current user profile
+    'User.Read.All',          // ✅ READ ALL TENANT USERS (Required!)
+    'User.ReadBasic.All',     // ✅ Read basic info of all users
+    'Group.Read.All',         // ✅ GROUPS
+    'GroupMember.Read.All',   // ✅ GROUP MEMBERS
+    'Sites.Read.All',         // ✅ SHAREPOINT SITES (for news)
+    'Sites.ReadWrite.All'     // ✅ SHAREPOINT WRITE (if you need to create/edit news)
   ],
   serviceConfiguration: {
     authorizationEndpoint: `https://login.microsoftonline.com/${env.MICROSOFT_TENANT_ID}/oauth2/v2.0/authorize`,

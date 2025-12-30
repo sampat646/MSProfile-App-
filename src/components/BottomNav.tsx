@@ -44,7 +44,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
           strokeWidth={2.5}
         />
         <Text style={[styles.tabText, activeTab === 'group' && styles.activeTabText]}>
-          Groups
+          People
         </Text>
       </TouchableOpacity>
 

@@ -5,43 +5,44 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import AuthNavbar from './src/components/AuthNavbar';
-import BottomNav from './src/components/BottomNav';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import GroupsScreen from './src/screens/GroupsScreen';
-import { RootStackParamList } from './src/types/navigation.types';
+import GroupsScreen from './src/screens/EmployeeDirectoryScreen';
+import { RootStackParamList, TabsParamList } from './src/types/navigation.types';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<TabsParamList>();
 
+const iconMap: Record<keyof TabsParamList, string> = {
+  Home: 'home',
+  People: 'users',
+  Profile: 'user'
+}
 const MainTabs = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'group' | 'profile'>('home');
-
-  const renderScreen = () => {
-    switch (activeTab) {
-      case 'home':
-        return <HomeScreen />;
-      case 'group':
-        return (
-          <View style={{ flex: 1 }} pointerEvents="box-none">
-            <GroupsScreen />
-          </View>
-        );
-      case 'profile':
-        return (
-          <View style={{ flex: 1 }} pointerEvents="box-none">
-            <ProfileScreen />
-          </View>
-        );
-      default:
-        return <HomeScreen />;
-    }
-  };
-
   return (
-    <View style={styles.content}>
-      {renderScreen()}
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, size }) => (
+          <Icon
+            name={iconMap[route.name]}
+            size={size}
+            color={focused ? '#2563eb' : 'gray'}
+          />
+
+        ),
+        headerShown: false,
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'grey'
+      })}
+
+    >
+      <Tab.Screen name='Home' component={HomeScreen} />
+      <Tab.Screen name='People' component={GroupsScreen} />
+      <Tab.Screen name='Profile' component={ProfileScreen} />
+    </Tab.Navigator >
+
   );
 };
 
@@ -69,7 +70,7 @@ const AppContent = () => {
   if (!user) {
     return (
       <SafeAreaView style={styles.container}>
-        <AuthNavbar onLogin={login} onLogout={() => {}} />
+        <AuthNavbar onLogin={login} onLogout={() => { }} />
         <View style={styles.content} />
       </SafeAreaView>
     );
